@@ -1,0 +1,9 @@
+C:\Git\P3Image.Interface\P3Image.DTO\bin\Debug\P3Image.DTO.dll
+C:\Git\P3Image.Interface\P3Image.DTO\bin\Debug\P3Image.DTO.pdb
+C:\Git\P3Image.Interface\P3Image.DTO\obj\Debug\P3Image.DTO.dll
+C:\Git\P3Image.Interface\P3Image.DTO\obj\Debug\P3Image.DTO.pdb
+C:\Git\P3Image.Interface\P3Image.DTO\obj\Debug\P3Image.DTO.csprojResolveAssemblyReference.cache
+C:\Git\P3Image\P3Image.DTO\bin\Debug\P3Image.DTO.dll
+C:\Git\P3Image\P3Image.DTO\bin\Debug\P3Image.DTO.pdb
+C:\Git\P3Image\P3Image.DTO\obj\Debug\P3Image.DTO.dll
+C:\Git\P3Image\P3Image.DTO\obj\Debug\P3Image.DTO.pdb

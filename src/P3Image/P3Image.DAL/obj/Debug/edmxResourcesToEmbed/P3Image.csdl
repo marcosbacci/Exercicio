@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="P3ImageModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="P3ImageEntities" p1:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+    <EntitySet Name="Campos" EntityType="P3ImageModel.Campos" />
+    <EntitySet Name="Categoria" EntityType="P3ImageModel.Categoria" />
+    <EntitySet Name="Lista" EntityType="P3ImageModel.Lista" />
+    <EntitySet Name="SubCategoria" EntityType="P3ImageModel.SubCategoria" />
+    <AssociationSet Name="FK_Campos_SubCategoria" Association="P3ImageModel.FK_Campos_SubCategoria">
+      <End Role="SubCategoria" EntitySet="SubCategoria" />
+      <End Role="Campos" EntitySet="Campos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lista_Campos" Association="P3ImageModel.FK_Lista_Campos">
+      <End Role="Campos" EntitySet="Campos" />
+      <End Role="Lista" EntitySet="Lista" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubCategoria_Categoria" Association="P3ImageModel.FK_SubCategoria_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="SubCategoria" EntitySet="SubCategoria" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Campos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Type="Int32" Name="Codigo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CodigoSubCategoria" Nullable="false" />
+    <Property Type="Int32" Name="Ordem" Nullable="false" />
+    <Property Type="String" Name="Descricao" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Boolean" Name="Ativo" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="SubCategoria" Relationship="P3ImageModel.FK_Campos_SubCategoria" FromRole="Campos" ToRole="SubCategoria" />
+    <NavigationProperty Name="Lista" Relationship="P3ImageModel.FK_Lista_Campos" FromRole="Campos" ToRole="Lista" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Type="Int32" Name="Codigo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Descricao" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Slug" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Ativo" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="SubCategoria" Relationship="P3ImageModel.FK_SubCategoria_Categoria" FromRole="Categoria" ToRole="SubCategoria" />
+  </EntityType>
+  <EntityType Name="Lista">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Type="Int32" Name="Codigo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CodigoCampo" Nullable="false" />
+    <Property Type="String" Name="Descricao" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Ativo" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Campos" Relationship="P3ImageModel.FK_Lista_Campos" FromRole="Lista" ToRole="Campos" />
+  </EntityType>
+  <EntityType Name="SubCategoria">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Type="Int32" Name="Codigo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CodigoCategoria" Nullable="false" />
+    <Property Type="String" Name="Descricao" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Slug" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Ativo" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Campos" Relationship="P3ImageModel.FK_Campos_SubCategoria" FromRole="SubCategoria" ToRole="Campos" />
+    <NavigationProperty Name="Categoria" Relationship="P3ImageModel.FK_SubCategoria_Categoria" FromRole="SubCategoria" ToRole="Categoria" />
+  </EntityType>
+  <Association Name="FK_Campos_SubCategoria">
+    <End Type="P3ImageModel.SubCategoria" Role="SubCategoria" Multiplicity="1" />
+    <End Type="P3ImageModel.Campos" Role="Campos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategoria">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Campos">
+        <PropertyRef Name="CodigoSubCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lista_Campos">
+    <End Type="P3ImageModel.Campos" Role="Campos" Multiplicity="1" />
+    <End Type="P3ImageModel.Lista" Role="Lista" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campos">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Lista">
+        <PropertyRef Name="CodigoCampo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubCategoria_Categoria">
+    <End Type="P3ImageModel.Categoria" Role="Categoria" Multiplicity="1" />
+    <End Type="P3ImageModel.SubCategoria" Role="SubCategoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="SubCategoria">
+        <PropertyRef Name="CodigoCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
